@@ -1,8 +1,8 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>리드앤라이트 상담</title><style>
-:root{--g:#0B3723;--o:#C1A05C}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#f6f3ec;height:100dvh;display:flex;flex-direction:column}
+:root{--g:#0B3723;--o:#C1A05C}*{box-sizing:border-box}html{background:#f6f3ec;height:100dvh}body{margin:0;font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#f6f3ec;height:100dvh;width:100%;position:fixed;left:0;right:0;top:0;display:flex;flex-direction:column;overflow:hidden}
 header{background:var(--g);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}header img{width:40px;height:40px}header b{display:block;font-size:16px}header small{color:var(--o);font-size:12px}
-#log{flex:1;overflow-y:auto;padding:14px}.m{max-width:82%;padding:10px 13px;border-radius:16px;margin:6px 0;line-height:1.5;font-size:15px;white-space:pre-wrap;word-break:keep-all}
+#log{flex:1;min-height:0;overflow-y:auto;padding:14px 14px 40px}.m{max-width:82%;padding:10px 13px;border-radius:16px;margin:6px 0;line-height:1.5;font-size:15px;white-space:pre-wrap;word-break:keep-all}
 .b{background:#fff;border:1px solid #e4dcc8;border-top-left-radius:4px}.u{background:var(--g);color:#fff;margin-left:auto;border-top-right-radius:4px}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.chips button{border:1px solid var(--o);background:#fff;color:var(--g);border-radius:16px;padding:6px 11px;font-size:13px}
 form#f{display:flex;gap:6px;padding:8px;background:#fff;border-top:1px solid #ddd}#q{flex:1;font-size:16px;padding:10px;border:1px solid #ccc;border-radius:20px}
@@ -21,12 +21,19 @@ const SYS="너는 '리드앤라이트영어교습소'의 온라인 상담 도우
 function fb(q){if(/초등/.test(q))return "죄송해요, 현재 중·고등학생만 운영 중이라 초등학생은 받지 않고 있어요(대기 접수도 어려워요).";if(/수강료|비용|얼마|가격/.test(q))return "수강료는 과정·학년에 따라 월 30만~40만원이에요. 정확한 금액은 원장님이 직접 연락드릴게요.";if(/위치|어디|주차/.test(q))return "대전 서구 월평동 무지개아파트 상가동 3층 304-2호예요. 주차 무료예요.";return "자세한 내용은 원장님이 직접 연락드릴게요. 아래 '상담 신청'으로 연락처를 남겨주시거나 0507-1312-1196로 전화 주세요."}
 async function callAI(){for(let i=0;i<2;i++){try{const r=await fetch('https://text.pollinations.ai/openai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'openai',messages:[{role:'system',content:SYS}].concat(msgs.slice(-12))})});const j=await r.json();const t=(j.choices[0].message.content||'').trim();if(t)return t}catch(e){}}return fb(msgs[msgs.length-1].content)}
 const sid=crypto.randomUUID?crypto.randomUUID():String(Math.random()),msgs=[],L=document.getElementById('log');
-function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;L.appendChild(d);L.scrollTop=1e9;return d}
+function scrollBottom(){requestAnimationFrame(function(){var last=L.lastElementChild;if(last&&last.scrollIntoView)last.scrollIntoView({block:'end'});L.scrollTop=L.scrollHeight})}
+function fitVV(){var vv=window.visualViewport;if(!vv)return;document.body.style.height=vv.height+'px';document.body.style.top=vv.offsetTop+'px'}
+function onVV(){fitVV();scrollBottom()}
+function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;L.appendChild(d);scrollBottom();return d}
 add('🍬 할로윈 캔디 받고 오셨군요! 반가워요.\n리드앤라이트영어교습소 상담 도우미예요. 수업, 수강료, 위치, 내신 대비 등 무엇이든 편하게 물어보세요.','b');
 const ch=document.createElement('div');ch.className='chips';['수강료가 궁금해요','위치·주차','고1 내신 대비','레벨테스트 받고 싶어요'].forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>ask(t);ch.appendChild(b)});L.appendChild(ch);
 async function ask(t){if(!t.trim())return;add(t,'u');msgs.push({role:'user',content:t});const w=add('답변 작성 중…','b');
-const a=await callAI();w.textContent=a;msgs.push({role:'assistant',content:a})}
+const a=await callAI();w.textContent=a;msgs.push({role:'assistant',content:a});scrollBottom()}
 f.onsubmit=e=>{e.preventDefault();const t=q.value;q.value='';ask(t)};
+q.addEventListener('focus',onVV);
+window.addEventListener('resize',onVV);
+if(window.visualViewport){visualViewport.addEventListener('resize',onVV);visualViewport.addEventListener('scroll',fitVV)}
+fitVV();
 async function sendLead(){if(!lc.checked)return alert('개인정보 수집·이용에 동의해 주세요.');if(!lp.value.trim())return alert('연락처를 입력해 주세요.');
 const a=JSON.parse(localStorage.getItem('rw_leads')||'[]');a.push({sid,name:ln.value,phone:lp.value,grade:lg.value,memo:lm.value,ts:new Date().toISOString()});localStorage.setItem('rw_leads',JSON.stringify(a));lead.style.display='none';add('신청 완료! 원장님이 직접 연락드릴게요. 🎃\n급하시면 0507-1312-1196로 전화 주세요.\n(시제품: 신청 내용은 이 기기에만 저장돼요. 서버 저장은 추후 연동 예정)','b')}
 </script></body></html>
