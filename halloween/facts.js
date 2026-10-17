@@ -2,6 +2,8 @@
 export const PHONE = "0507-1312-1196";
 export const FALLBACK = "그 부분은 원장님께 직접 확인해 드리겠습니다. 아래 '상담 신청'에 연락처를 남겨주시거나 " + PHONE + "로 전화 주세요.";
 export const FACTS = [
+ {id:"teacher", label:"강사", re:/원어민|외국인|네이티브|(선생|강사|쌤|원장)[님은이가의]?\s*(몇|누구|어떤|경력|이력|학력|출신|전공|자격|국적|나이|프로필|소개)|몇\s*분이|누가\s*(가르|수업)|직접\s*가르/,
+  a:FALLBACK},
  {id:"fee", label:"교습비", re:/교습비|수강료|학원비|비용|얼마(?!나)|가격|금액|월\s*\d+\s*만/,
   a:"교습비는 과정과 학년에 따라 월 30만~40만원이며, 교육지원청에 신고한 금액입니다. 정확한 금액은 학년과 과정을 확인한 뒤 원장님이 안내해 드립니다."},
  {id:"schedule", label:"수업 시간", re:/시간표|몇\s*시|언제\s*수업|수업\s*(시간|요일|횟수)|요일|주\s*몇|일주일|빈자리|자리\s*있|정원|몇\s*명|인원/,
@@ -46,7 +48,7 @@ export function postCheck(t){
   if (/보장|100%|카카오|카톡|http|www\.|\.com|\.kr|남대전/.test(t)) return false;
   return true;
 }
-const SUPPRESS={sibling:["discount","fee"],discount:["fee","freecourse"],homepage:["location"],extra:["fee","class"],guarantee:["class"],elementary:["class"],leveltest:["class"],adult:["class"]};
+const SUPPRESS={teacher:["class","schedule","adult","fee"],sibling:["discount","fee"],discount:["fee","freecourse"],homepage:["location"],extra:["fee","class"],guarantee:["class"],elementary:["class"],leveltest:["class"],adult:["class"]};
 export function matchFacts(q){
   let m=FACTS.filter(f=>f.re.test(q)); const ids=new Set(m.map(f=>f.id)); const drop=new Set();
   for(const id of ids) for(const d of (SUPPRESS[id]||[])) drop.add(d);

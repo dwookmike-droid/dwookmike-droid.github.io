@@ -35,7 +35,7 @@ footer{font-size:11px;color:#555;padding:4px 10px 8px;text-align:center;line-hei
 <label><input type="checkbox" id="u14">학생이 만 14세 미만이며, 보호자가 작성합니다.</label>
 <button class="btn" id="send" type="button" style="width:100%;padding:12px">신청하기</button><button type="button" id="close" style="width:100%;margin-top:6px;padding:10px;border:0;background:none">닫기</button></div></div>
 <script type="module">
-import {FACTS,QUICK,FALLBACK,postCheck,matchFacts} from "./facts.js?v=2";
+import {FACTS,QUICK,FALLBACK,postCheck,matchFacts} from "./facts.js?v=3";
 const SB="https://abaakjkidxsnfigqfcbx.supabase.co",KEY="sb_publishable_v1VeCcFo-iQzeP4tpug0ew_AIkyzaSI";
 const CHAT=SB+"/functions/v1/consult-chat";
 const src=(new URLSearchParams(location.search).get("src")||"direct").slice(0,40);
