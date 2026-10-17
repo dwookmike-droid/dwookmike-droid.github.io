@@ -1,82 +1,150 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>리드앤라이트영어교습소 상담</title><style>
-:root{--g:#0B3723;--o:#C1A05C}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#f6f3ec;height:100dvh;display:flex;flex-direction:column}
-header{background:var(--g);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}header img{width:40px;height:40px}header b{display:block;font-size:16px}header small{color:var(--o);font-size:12px}
-#log{flex:1;overflow-y:auto;padding:14px}.m{max-width:85%;padding:10px 13px;border-radius:16px;margin:6px 0;line-height:1.55;font-size:15px;white-space:pre-wrap;word-break:keep-all}
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>리드앤라이트영어교습소 상담</title><meta name="theme-color" content="#0B3723"><meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.png" type="image/png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root{--g:#0B3723;--o:#C1A05C;--pk:#D9822B;--ink:#1d2621;--mut:#4a4f4c}*{box-sizing:border-box}
+html{background:#e9e4d8}body{margin:0 auto;max-width:480px;font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:var(--ink);background:#f6f3ec;height:100dvh;display:flex;flex-direction:column;box-shadow:0 0 0 1px #ddd5c3}
+header{background:var(--g);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}header img{width:40px;height:40px;object-fit:contain}header b{display:block;font-size:16px}header small{color:var(--o);font-size:13px;display:flex;align-items:center;gap:4px}
+.pk{width:15px;height:15px;flex:none;vertical-align:-2px}
+#log{flex:1;overflow-y:auto;padding:14px}.m{max-width:88%;padding:10px 13px;border-radius:16px;margin:6px 0;line-height:1.55;font-size:15px;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
 .b{background:#fff;border:1px solid #e4dcc8;border-top-left-radius:4px}.u{background:var(--g);color:#fff;margin-left:auto;border-top-right-radius:4px}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.chips button,.chips a{border:1px solid var(--o);background:#fff;color:var(--g);border-radius:16px;padding:6px 11px;font-size:13px;text-decoration:none}
-.chips .soon{opacity:.55}form#f{display:flex;gap:6px;padding:8px;background:#fff;border-top:1px solid #ddd}#q{flex:1;font-size:16px;padding:10px;border:1px solid #ccc;border-radius:20px}
-.btn{background:var(--g);color:#fff;border:0;border-radius:20px;padding:0 16px;font-size:15px}#lb{background:var(--o);color:var(--g);font-weight:bold;margin:0 8px 6px;padding:11px;border-radius:12px;border:0;font-size:15px}
-#lead{display:none;position:fixed;inset:0;background:#0008;align-items:flex-end;z-index:9}#lead .p{background:#fff;width:100%;max-height:92dvh;overflow-y:auto;padding:16px;border-radius:16px 16px 0 0}
-#lead input,#lead select,#lead textarea{width:100%;padding:9px;margin:4px 0;font-size:16px;border:1px solid #ccc;border-radius:8px}#lead label{font-size:13px;display:flex;gap:6px;margin:6px 0;align-items:flex-start}
-#lead label input{width:auto;margin-top:3px}.pv{font-size:12px;background:#f6f3ec;padding:8px;border-radius:8px;line-height:1.5}
-footer{font-size:11px;color:#555;padding:4px 10px 8px;text-align:center;line-height:1.5;background:#f6f3ec}footer a{color:#555}
+.card{background:#fff;border:1px solid #e4dcc8;border-left:4px solid var(--o);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14px;line-height:1.55;color:var(--ink)}.card b{color:var(--g)}
+.disc{font-size:13px;color:var(--mut);border-left-color:#cfc6b0}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}.chips button,.chips a{min-height:44px;display:inline-flex;align-items:center;border:1px solid var(--o);background:#fff;color:var(--g);border-radius:22px;padding:8px 14px;font-size:14px;text-decoration:none;cursor:pointer}
+.chips .soon{border-color:#bbb;color:#555;background:#f2f2f0}
+#lb{background:var(--o);color:var(--g);font-weight:bold;margin:0 8px 6px;min-height:48px;padding:12px;border-radius:12px;border:0;font-size:16px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+form#f{display:flex;gap:6px;padding:8px;background:#fff;border-top:1px solid #ddd}#q{flex:1;font-size:16px;min-height:44px;padding:10px 14px;border:1px solid #999;border-radius:22px}
+.btn{background:var(--g);color:#fff;border:0;border-radius:22px;min-height:44px;padding:0 18px;font-size:16px;cursor:pointer}.btn:disabled{background:#7d8a83;cursor:default}
+footer{font-size:12px;color:#444;padding:5px 10px 8px;text-align:center;line-height:1.5;background:#f6f3ec}footer a{color:#333}
+#lead{display:none;position:fixed;inset:0;background:#0009;align-items:flex-end;justify-content:center;z-index:9}#lead.open{display:flex}
+#lead .p{background:#fff;width:100%;max-width:480px;max-height:94dvh;overflow-y:auto;padding:16px 16px 24px;border-radius:16px 16px 0 0}
+#lead .fl{display:block;font-size:14px;font-weight:600;margin:12px 0 4px;color:var(--ink)}#lead .fl em{font-style:normal;font-weight:400;color:var(--mut)}#lead .fl .req{color:#b00020}
+#lead input[type=text],#lead input[type=tel],#lead select,#lead textarea{width:100%;min-height:46px;padding:10px;font-size:16px;border:1px solid #888;border-radius:8px;background:#fff;color:var(--ink)}
+#lead .ck{font-size:14px;display:flex;gap:10px;margin:8px 0;align-items:center;min-height:44px;cursor:pointer}#lead .ck input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--g)}
+.pv{font-size:13px;background:#f6f3ec;padding:10px;border-radius:8px;line-height:1.55;margin-top:12px;color:var(--ink)}.pv a{color:var(--g)}
+.warn{display:none;background:#fff4e5;border:1px solid #e0a35a;color:#5a3300;padding:10px;border-radius:8px;font-size:14px;margin-top:8px}
+#err{color:#b00020;font-size:14px;min-height:1em;margin:8px 0 0}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#close{width:100%;margin-top:6px;min-height:44px;border:0;background:none;font-size:15px;color:var(--ink);cursor:pointer}
 </style></head><body>
-<header><img src="logo.png" alt=""><div><b>리드앤라이트영어교습소</b><small>해피 할로윈 · 궁금한 점을 물어보세요</small></div></header>
-<div id="log"></div>
-<button id="lb" type="button">상담 신청 · 레벨테스트 날짜 고르기</button>
-<form id="f"><input id="q" placeholder="궁금한 점을 입력하세요" autocomplete="off" maxlength="300"><button class="btn">전송</button></form>
-<footer>리드앤라이트영어교습소 · 교습소 신고번호 제3-가-05019호 · 교습과목 외국어(영어) · 중·고등 과정<br>교습비 월 30만~40만원(과정·학년별, 교육지원청 신고 금액) · 대전 서구 청사서로 11 무지개아파트 상가동 3층 · <a href="tel:050713121196">0507-1312-1196</a></footer>
-<div id="lead"><div class="p"><b>상담 신청</b> <small>원장님이 직접 연락드립니다</small>
-<select id="who"><option value="학부모">학부모입니다</option><option value="학생">학생입니다</option></select>
-<input id="grade" placeholder="학생 학년 (예: 중2, 고1, 초6)"><input id="school" placeholder="학교 (선택)">
-<textarea id="concern" rows="2" placeholder="고민이나 궁금한 점 (선택)"></textarea>
-<input id="phone" placeholder="연락처 (필수)" inputmode="tel">
-<select id="ctime"><option value="">상담 전화 받기 좋은 시간</option><option>평일 오전</option><option>평일 오후</option><option>평일 저녁</option><option>주말</option></select>
-<label><input type="checkbox" id="lt">레벨테스트도 받고 싶어요 (약 30분)</label>
-<select id="ltd" style="display:none"></select>
+<header><img src="logo.png" alt="리드앤라이트영어교습소 로고"><div><b>리드앤라이트영어교습소</b><small><svg class="pk" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4.2c.2-1.3.9-2.1 2-2.5" stroke="#9bc49a" stroke-width="1.4" fill="none" stroke-linecap="round"/><ellipse cx="5.4" cy="9.6" rx="3.6" ry="4.4" fill="#D9822B"/><ellipse cx="10.6" cy="9.6" rx="3.6" ry="4.4" fill="#D9822B"/><ellipse cx="8" cy="9.6" rx="3" ry="4.8" fill="#EE9640"/></svg>해피 할로윈 · 궁금한 점을 물어보세요</small></div></header>
+<div id="log" aria-live="polite"></div>
+<button id="lb" type="button"><svg class="pk" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4.2c.2-1.3.9-2.1 2-2.5" stroke="#0B3723" stroke-width="1.4" fill="none" stroke-linecap="round"/><ellipse cx="5.4" cy="9.6" rx="3.6" ry="4.4" fill="#8a4a12"/><ellipse cx="10.6" cy="9.6" rx="3.6" ry="4.4" fill="#8a4a12"/><ellipse cx="8" cy="9.6" rx="3" ry="4.8" fill="#a85a18"/></svg>상담 신청 · 레벨테스트 날짜 고르기</button>
+<form id="f"><label for="q" class="hp">질문 입력</label><input id="q" placeholder="궁금한 점을 입력하세요" autocomplete="off" maxlength="300" enterkeyhint="send"><button class="btn">전송</button></form>
+<footer>리드앤라이트영어교습소 · 교습소 신고번호 제3-가-05019호 · 외국어(영어) 중·고등 과정<br>교습비 월 30만~40만원(교육지원청 신고 금액) · 할인: 무료코스 수료 후 등록 시 10%, 형제할인(비율은 상담 시 안내) · <a href="tel:050713121196">0507-1312-1196</a> · <a href="privacy.html">개인정보처리방침</a></footer>
+<div id="lead" role="dialog" aria-modal="true" aria-labelledby="leadt"><div class="p">
+<b id="leadt" style="font-size:18px">상담 신청</b> <span style="font-size:14px;color:var(--mut)">원장님이 직접 연락드립니다</span>
+<label class="fl" for="who">작성하시는 분 <span class="req">(필수)</span></label>
+<select id="who"><option value="학부모">학부모(보호자)</option><option value="학생">학생 본인</option></select>
+<label class="fl" for="grade">학생 학년 <span class="req">(필수)</span></label>
+<select id="grade"><option value="">학년을 골라 주세요</option><option>초6</option><option>중1</option><option>중2</option><option>중3</option><option>고1</option><option>고2</option><option>고3</option></select>
+<div class="warn" id="u14w">만 14세 미만 학생은 이 페이지에서 직접 신청할 수 없습니다. 보호자(학부모)께서 작성해 주시거나 0507-1312-1196로 전화 주세요.</div>
+<label class="ck" id="age14row" style="display:none"><input type="checkbox" id="age14">학생 본인이 만 14세 이상입니다.</label>
+<label class="fl" for="school">학교 <em>(선택)</em></label><input type="text" id="school" maxlength="40" autocomplete="off">
+<label class="fl" for="gname">보호자 성함 <em>(선택)</em></label><input type="text" id="gname" maxlength="20" autocomplete="name">
+<label class="fl" for="concern">고민이나 궁금한 점 <em>(선택)</em></label><textarea id="concern" rows="2" maxlength="500"></textarea>
+<label class="fl" for="phone">연락처 <span class="req">(필수)</span> <em>숫자만 입력해도 됩니다</em></label><input type="tel" id="phone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="예: 010-1234-5678">
+<label class="fl" for="ctime">상담 전화 받기 좋은 시간 <em>(선택)</em></label>
+<select id="ctime"><option value="">상관없음</option><option>평일 오전</option><option>평일 오후</option><option>평일 저녁</option></select>
+<label class="ck"><input type="checkbox" id="lt">레벨테스트도 받고 싶어요 (약 30분)</label>
+<label class="fl" for="ltd" id="ltdl" style="display:none">레벨테스트 희망 날짜 <em>(선택)</em></label><select id="ltd" style="display:none"></select>
+<div class="hp" aria-hidden="true"><label for="website">웹사이트</label><input type="text" id="website" tabindex="-1" autocomplete="off"></div>
 <div class="pv"><b>[필수] 개인정보 수집·이용 동의</b><br>
-· 수집 항목: 작성자 구분, 학생 학년, 학교, 고민 내용, 연락처, 상담 희망 시간, 레벨테스트 희망일, 이 페이지에서 나눈 질문 요약<br>
+· 처리자: 리드앤라이트영어교습소(원장 강동욱, 0507-1312-1196)<br>
+· 수집 항목: 작성자 구분, 학생 학년, 연락처, (선택) 학교·보호자 성함·고민 내용·상담 희망 시간·레벨테스트 희망일, 이 페이지에서 입력한 질문 요약<br>
 · 이용 목적: 상담 연락과 레벨테스트 일정 안내<br>
 · 보관 기간: 상담 종료 후 1년, 이후 파기<br>
-· 동의를 거부할 수 있으며, 거부하시면 이 페이지로 상담 신청은 되지 않습니다. 전화 0507-1312-1196로 상담하실 수 있습니다.<br>
-· 학생이 만 14세 미만이면 보호자(학부모)가 직접 작성해 주세요.</div>
-<label><input type="checkbox" id="consent">위 내용을 확인했고 개인정보 수집·이용에 동의합니다.</label>
-<label><input type="checkbox" id="u14">학생이 만 14세 미만이며, 보호자가 작성합니다.</label>
-<button class="btn" id="send" type="button" style="width:100%;padding:12px">신청하기</button><button type="button" id="close" style="width:100%;margin-top:6px;padding:10px;border:0;background:none">닫기</button></div></div>
+· 처리위탁·국외 이전: 신청 내용은 Supabase(서버 일본)에 저장합니다. 채팅 질문은 주제 분류를 위해 Google(Gemini)·Groq 서버(미국)로 보내며, 교습소에는 질문 요약만 저장합니다.<br>
+· 동의를 거부할 수 있으며, 거부하시면 이 페이지로 신청은 되지 않습니다. 전화 0507-1312-1196로 상담하실 수 있습니다.<br>
+· 만 14세 미만 학생은 보호자가 작성해 주세요.<br>
+<a href="privacy.html" target="_blank" rel="noopener">개인정보처리방침 전체 보기</a></div>
+<label class="ck"><input type="checkbox" id="consent">위 내용을 확인했고 개인정보 수집·이용에 동의합니다.</label>
+<p id="err" role="alert"></p>
+<button class="btn" id="send" type="button" style="width:100%;min-height:50px">신청하기</button><button type="button" id="close">닫기</button></div></div>
 <script type="module">
-import {FACTS,QUICK,FALLBACK,postCheck,matchFacts} from "./facts.js?v=3";
-const SB="https://abaakjkidxsnfigqfcbx.supabase.co",KEY="sb_publishable_v1VeCcFo-iQzeP4tpug0ew_AIkyzaSI";
-const CHAT=SB+"/functions/v1/consult-chat";
-const src=(new URLSearchParams(location.search).get("src")||"direct").slice(0,40);
-const L=document.getElementById("log"),$=id=>document.getElementById(id),asked=[];
-function add(t,c){const d=document.createElement("div");d.className="m "+c;d.textContent=t;L.appendChild(d);L.scrollTop=1e9;return d}
+import {FACTS,TALK,QUICK,FALLBACK,NET_ERROR,INTRO,matchFacts,isInstruction} from "./facts.js?v=4";
+const FN="https://abaakjkidxsnfigqfcbx.supabase.co/functions/v1/",KEY="sb_publishable_v1VeCcFo-iQzeP4tpug0ew_AIkyzaSI";
+const src=(new URLSearchParams(location.search).get("src")||"direct").replace(/[^\w가-힣-]/g,"").slice(0,40)||"direct";
+const L=document.getElementById("log"),$=id=>document.getElementById(id);
+const HK="rw_chat_v4",PK="rw_pending_v4";
+let hist=[];try{hist=JSON.parse(sessionStorage.getItem(HK)||"[]")}catch(e){}
+try{localStorage.removeItem("rw_consults")}catch(e){} // v3가 남긴 신청 사본 정리
+const save=()=>{try{sessionStorage.setItem(HK,JSON.stringify(hist.slice(-60)))}catch(e){}};
+function add(t,c,keep=true){const d=document.createElement("div");d.className="m "+c;d.textContent=t;L.appendChild(d);L.scrollTop=1e9;if(keep){hist.push({t,c});save()}return d}
+function card(html,cls){const d=document.createElement("div");d.className="card "+(cls||"");d.innerHTML=html;L.appendChild(d)}
 function chips(items){const c=document.createElement("div");c.className="chips";items.forEach(x=>c.appendChild(x));L.appendChild(c);L.scrollTop=1e9}
 function btn(t,fn,cls){const b=document.createElement("button");b.type="button";b.textContent=t;if(cls)b.className=cls;b.onclick=fn;return b}
-add("할로윈 사탕 받고 오셨군요. 반갑습니다.\n리드앤라이트영어교습소 상담 페이지입니다. 아래 버튼을 누르거나 궁금한 점을 입력해 주세요.","b");
+// 첫 화면
+const candy=/candy|사탕/i.test(src);
+add((candy?"할로윈 사탕 받고 오셨군요. 반갑습니다.\n":"")+"리드앤라이트영어교습소 상담 페이지입니다. 아래 버튼을 누르거나 궁금한 점을 입력해 주세요.\n채팅 질문은 답할 주제를 고르기 위해 해외 AI 서버로 전송되니, 이름이나 연락처는 쓰지 마세요.","b",false);
+card("<b>원장 소개</b><br>"+INTRO);
 chips(QUICK.map(id=>{const f=FACTS.find(x=>x.id==id);return btn(f.label,()=>ask(f.label,[f]))}));
-add("무료코스 (5일, 하루 10~15분)","b");
-const a=document.createElement("a");a.href="../course/cho6/?src="+encodeURIComponent(src);a.textContent="초6 (예비 중1) 시작하기";
-chips([a,btn("중고등 · 곧 오픈",()=>add("중고등 무료코스는 곧 엽니다. 상담 신청에 남겨주시면 열릴 때 알려드립니다.","b"),"soon"),btn("회화 · 곧 오픈",()=>add("회화 무료코스는 곧 엽니다. 상담 신청에 남겨주시면 열릴 때 알려드립니다.","b"),"soon")]);
-async function llm(q,w){
-  try{const r=await fetch(CHAT,{method:"POST",headers:{"content-type":"application/json",apikey:KEY},body:JSON.stringify({q})});
-    if(!r.ok||!r.body)throw 0;const rd=r.body.getReader(),dec=new TextDecoder();let all="";
-    while(true){const{done,value}=await rd.read();if(done)break;all+=dec.decode(value,{stream:true});
-      const nl=all.indexOf("\n");if(nl>0&&/^INTENT:\s*talk/.test(all)){const body=all.slice(nl+1).replace("[[CHECK:FAIL]]","");if(body.trim())w.textContent=body}}
-    const first=(all.split("\n")[0]||"").replace("INTENT:","").split(",").map(s=>s.trim());
-    if(first.includes("talk")){const body=all.split("\n").slice(1).join("\n").trim();
-      return (!body||all.includes("[[CHECK:FAIL]]")||!postCheck(body))?FALLBACK:body}
-    const fs=FACTS.filter(f=>first.includes(f.id));return fs.length?fs.map(f=>f.a).join("\n\n"):FALLBACK;
-  }catch(e){return FALLBACK}
+add("무료코스 (5일, 하루 10~15분, 기한 없음)","b",false);
+const SOON_MSG="초6 무료 영어 읽기 코스는 곧 엽니다. 상담 신청에 남겨주시면 열릴 때 알려드립니다.";
+const cho=btn("초6 무료 영어 읽기 코스 · 곧 오픈",()=>add(SOON_MSG,"b"),"soon");
+chips([cho,btn("중고등 무료코스 · 곧 오픈",()=>add("중고등 무료코스는 곧 엽니다. 상담 신청에 남겨주시면 열릴 때 알려드립니다.","b"),"soon")]);
+fetch("../course/cho6/",{method:"HEAD",cache:"no-store"}).then(r=>{if(!r.ok)return;const a=document.createElement("a");a.href="../course/cho6/?src="+encodeURIComponent(src);a.textContent="초6 무료 영어 읽기 코스 시작하기";cho.replaceWith(a)}).catch(()=>{});
+card("<b>광고 표시</b><br>리드앤라이트영어교습소 · 교습소 신고번호 제3-가-05019호 · 교습과목 외국어(영어) · 중·고등 과정<br>교습비 월 30만~40만원(과정·학년별, 교육지원청 신고 금액), 게시 교습비 외 기타경비 없음<br>할인: 무료코스 수료 후 등록 시 교습비 10% · 형제할인(비율은 상담 시 안내)<br>대전 서구 청사서로 11 무지개아파트 상가동 3층 · 0507-1312-1196","disc");
+for(const h of hist)add(h.t,h.c,false);
+const asked=hist.filter(h=>h.c=="u").map(h=>h.t);
+// 채팅
+async function classify(q){
+  const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),12000);
+  try{const r=await fetch(FN+"consult-chat",{method:"POST",signal:ac.signal,headers:{"content-type":"application/json",apikey:KEY},body:JSON.stringify({q})});
+    if(!r.ok)return NET_ERROR;
+    const line=((await r.text()).split("\n")[0]||"").replace("INTENT:","");const ids=line.split(",").map(s=>s.trim()).filter(Boolean);
+    const talk=ids.find(i=>TALK[i]);const fs=FACTS.filter(f=>ids.includes(f.id));
+    if(fs.length)return fs.slice(0,3).map(f=>f.a).join("\n\n");
+    return talk?TALK[talk]:FALLBACK;
+  }catch(e){return NET_ERROR}finally{clearTimeout(tm)}
 }
-async function ask(t,fs){t=t.trim();if(!t)return;add(t,"u");asked.push(t);
+async function ask(t,fs){t=t.trim().slice(0,300);if(!t)return;add(t,"u");asked.push(t);
   fs=fs||matchFacts(t);
+  if(isInstruction(t,fs.length>0)){add(FALLBACK,"b");return}
   if(fs.length){add(fs.slice(0,3).map(f=>f.a).join("\n\n"),"b");return}
-  const w=add("확인 중입니다…","b");w.textContent=await llm(t,w);L.scrollTop=1e9}
+  const w=add("확인 중입니다…","b",false);const a=await classify(t);w.remove();add(a,"b")}
 $("f").onsubmit=e=>{e.preventDefault();const t=$("q").value;$("q").value="";ask(t)};
+// 상담 신청
 const days=[];for(const [s,e] of [[2,6],[9,13]])for(let d=s;d<=e;d++)days.push(d);
-$("ltd").innerHTML='<option value="">희망 날짜</option>'+days.map(d=>{const w="일월화수목금토"[new Date(2026,10,d).getDay()];return `<option value="2026-11-${String(d).padStart(2,"0")}">11/${d}(${w})</option>`}).join("");
-$("lt").onchange=()=>$("ltd").style.display=$("lt").checked?"block":"none";
-$("lb").onclick=()=>$("lead").style.display="flex";$("close").onclick=()=>$("lead").style.display="none";
+$("ltd").innerHTML='<option value="">상관없음</option>'+days.map(d=>{const w="일월화수목금토"[new Date(2026,10,d).getDay()];return `<option value="2026-11-${String(d).padStart(2,"0")}">11/${d}(${w})</option>`}).join("");
+$("lt").onchange=()=>{const v=$("lt").checked?"block":"none";$("ltd").style.display=v;$("ltdl").style.display=v};
+const PHONE_RE=/^(010\d{8}|0507\d{8}|02\d{7,8}|0[3-6][1-5]\d{7,8})$/;
+function u14(){const st=$("who").value=="학생",g=$("grade").value;const block=st&&(g=="초6"||g=="중1");
+  $("u14w").style.display=block?"block":"none";$("age14row").style.display=st&&g=="중2"?"flex":"none";$("send").disabled=block;return block}
+$("who").onchange=u14;$("grade").onchange=u14;
+let leadOpen=false;
+function openLead(){if(leadOpen)return;leadOpen=true;$("lead").classList.add("open");history.pushState({lead:1},"");$("err").textContent=""}
+function closeLead(fromPop){if(!leadOpen)return;leadOpen=false;$("lead").classList.remove("open");if(!fromPop&&history.state&&history.state.lead)history.back()}
+window.addEventListener("popstate",()=>closeLead(true));
+$("lb").onclick=openLead;$("close").onclick=()=>closeLead(false);
+const MSG={phone:"연락처를 확인해 주세요. 휴대폰(010) 또는 일반전화 번호를 숫자로 입력해 주세요.",grade:"학생 학년을 골라 주세요.",consent:"개인정보 수집·이용에 동의해 주세요.",
+  u14:"만 14세 미만 학생은 보호자(학부모)가 작성해 주세요.",u14c:"학생 본인이 만 14세 이상인지 확인해 주세요.",rate:"신청이 잠시 많이 들어왔습니다. 잠시 후 다시 시도하시거나 0507-1312-1196로 전화 주세요."};
+function resetForm(){for(const id of ["school","gname","concern","phone","website"])$(id).value="";for(const id of ["grade","ctime","ltd"])$(id).value="";
+  for(const id of ["lt","consent","age14"])$(id).checked=false;$("who").value="학부모";$("lt").onchange();u14()}
+async function post(row){const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),15000);
+  try{const r=await fetch(FN+"consult-submit",{method:"POST",signal:ac.signal,headers:{"content-type":"application/json",apikey:KEY},body:JSON.stringify(row)});
+    let j={};try{j=await r.json()}catch(e){}return {net:false,ok:r.ok&&j.ok===true,code:j.code}}catch(e){return {net:true}}finally{clearTimeout(tm)}}
 $("send").onclick=async()=>{
-  if(!$("consent").checked)return alert("개인정보 수집·이용에 동의해 주세요.");
-  const phone=$("phone").value.trim();if(!/\d{3,}/.test(phone))return alert("연락처를 입력해 주세요.");
-  const row={id:crypto.randomUUID(),parent_or_student:$("who").value,student_grade:$("grade").value.trim()||null,school:$("school").value.trim()||null,
+  $("err").textContent="";if(u14())return;
+  const phone=$("phone").value.replace(/\D/g,"");
+  if(!$("grade").value)return $("err").textContent=MSG.grade;
+  if($("who").value=="학생"&&$("grade").value=="중2"&&!$("age14").checked)return $("err").textContent=MSG.u14c;
+  if(!PHONE_RE.test(phone))return $("err").textContent=MSG.phone;
+  if(!$("consent").checked)return $("err").textContent=MSG.consent;
+  const row={parent_or_student:$("who").value,student_grade:$("grade").value,school:$("school").value.trim()||null,guardian_name:$("gname").value.trim()||null,
     concern:$("concern").value.trim()||null,phone,consult_time:$("ctime").value||null,wants_level_test:$("lt").checked,
-    level_test_date:$("lt").checked&&$("ltd").value?$("ltd").value:null,source:src,consent_privacy:true,under14_guardian:$("u14").checked,
-    chat_summary:asked.slice(-10).join(" / ").slice(0,1000)||null};
-  let ok=false;try{const r=await fetch(SB+"/rest/v1/fc_consults",{method:"POST",headers:{apikey:KEY,"content-type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(row)});ok=r.ok}catch(e){}
-  const q=JSON.parse(localStorage.getItem("rw_consults")||"[]");q.push({...row,saved:ok,ts:new Date().toISOString()});localStorage.setItem("rw_consults",JSON.stringify(q));
-  $("lead").style.display="none";
-  add(ok?"신청이 접수되었습니다. 원장님이 직접 연락드립니다.\n급하시면 0507-1312-1196로 전화 주세요.":"신청 내용을 저장하지 못했습니다. 번거로우시겠지만 0507-1312-1196로 전화 주세요.","b")};
+    level_test_date:$("lt").checked&&$("ltd").value?$("ltd").value:null,source:src,consent_privacy:true,age14_confirm:$("age14").checked,
+    chat_summary:asked.slice(-10).join(" / ").slice(0,1000)||null,website:$("website").value};
+  $("send").disabled=true;$("send").textContent="보내는 중…";
+  const r=await post(row);
+  $("send").disabled=false;$("send").textContent="신청하기";
+  if(r.ok){try{localStorage.removeItem(PK)}catch(e){}resetForm();closeLead(false);add("신청이 접수되었습니다. 원장님이 직접 연락드립니다.\n급하시면 0507-1312-1196로 전화 주세요.","b");return}
+  if(r.net){try{localStorage.setItem(PK,JSON.stringify(row))}catch(e){}resetForm();closeLead(false);
+    add("연결이 불안정해 신청을 보내지 못했습니다. 이 기기에 잠시 보관했다가 다음에 이 페이지를 열 때 다시 보냅니다. 급하시면 0507-1312-1196로 전화 주세요.","b");return}
+  $("err").textContent=MSG[r.code]||"신청 내용을 저장하지 못했습니다. 번거로우시겠지만 0507-1312-1196로 전화 주세요.";
+};
+// 지난번 전송 실패분 다시 보내기
+(async()=>{let p=null;try{p=JSON.parse(localStorage.getItem(PK)||"null")}catch(e){}if(!p)return;
+  const r=await post(p);if(r.ok||(!r.net&&r.code&&r.code!="rate"&&r.code!="db")){try{localStorage.removeItem(PK)}catch(e){}}
+  if(r.ok)add("지난번에 보내지 못한 상담 신청을 이번에 접수했습니다. 원장님이 직접 연락드립니다.","b")})();
 </script></body></html>
